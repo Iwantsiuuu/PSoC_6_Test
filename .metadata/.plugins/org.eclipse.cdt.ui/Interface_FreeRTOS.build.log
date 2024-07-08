@@ -1,0 +1,56 @@
+20:36:09 **** Build of configuration Debug for project Interface_FreeRTOS ****
+"C:\\ModusToolbox\\tools_3.1\\modus-shell\\bin\\make" CY_MAKE_IDE=eclipse CY_IDE_TOOLS_DIR=C:/ModusToolbox/tools_3.1 CY_IDE_BT_TOOLS_DIR= --output-sync -j4 all 
+Tools Directory: C://ModusToolbox/tools_3.1
+Removing .mtbqueryapi file...
+Searching installed tools in progress...
+Searching installed tools complete
+
+
+Initializing build: mtb-example-empty-app Debug APP_CY8CKIT-062S2-43012 GCC_ARM
+
+Prebuild operations complete
+
+Auto-discovery in progress...
+Auto-discovery complete
+Commencing build operations...
+
+Tools Directory: C://ModusToolbox/tools_3.1
+
+Constructing build rules...
+Build rules construction complete
+
+==============================================================================
+= Building application =
+==============================================================================
+Generating compilation database file...
+-> ./build/compile_commands.json
+Compilation database file generation complete
+Building 368 file(s)
+==============================================================================
+= Build complete =
+==============================================================================
+
+Calculating memory consumption: CY8C624ABZI-S2D44 GCC_ARM
+
+   ---------------------------------------------------- 
+  | Section Name         |  Address      |  Size       | 
+   ---------------------------------------------------- 
+  | .cy_m0p_image        |  0x10000000   |  6352       | 
+  | .text                |  0x10002000   |  46868      | 
+  | .ARM.exidx           |  0x1000d714   |  8          | 
+  | .copy.table          |  0x1000d71c   |  24         | 
+  | .zero.table          |  0x1000d734   |  8          | 
+  | .data                |  0x080022e0   |  1152       | 
+  | .cy_sharedmem        |  0x08002760   |  8          | 
+  | .noinit              |  0x08002768   |  228        | 
+  | .bss                 |  0x0800284c   |  4936       | 
+  | .heap                |  0x08003b98   |  1027176    | 
+   ---------------------------------------------------- 
+
+  Total Internal Flash (Available)          2097152    
+  Total Internal Flash (Utilized)           56268      
+
+
+
+20:36:21 Build Finished. 0 errors, 0 warnings. (took 12s.257ms)
+

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;RTC_Basics/rtc_smartClock.h&apos;" deleteContents="false" description="Delete resource &apos;RTC_Basics/rtc_smartClock.h&apos;" element1="/RTC_Basics/rtc_smartClock.h" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1708187457176"/>
+</session>

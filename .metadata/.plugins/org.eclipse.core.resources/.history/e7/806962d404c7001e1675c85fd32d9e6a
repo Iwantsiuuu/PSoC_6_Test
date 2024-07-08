@@ -1,0 +1,88 @@
+#include "cybsp.h"
+#include "cyhal.h"
+
+/*Include FreeRTOS*/
+#include "FreeRTOS.h"
+#include "FreeRTOSConfig.h"
+#include "queue.h"
+#include "task.h"
+
+#include "mtb_ssd1306.h"
+#include "u8g2.h"
+#include "u8g2_support.h"
+
+#define taskPriority  		(6)
+TaskHandle_t testH;
+
+
+static void test(){
+	cy_rslt_t result;
+
+	cyhal_i2c_t i2c_obj;
+	u8g2_t u8g2;
+
+	/* Initialize the I2C to use with the OLED display */
+	result = cyhal_i2c_init(&i2c_obj, CYBSP_I2C_SDA, CYBSP_I2C_SCL, NULL);
+	CY_ASSERT(result == CY_RSLT_SUCCESS);
+
+	/* Initialize the OLED display */
+	result = mtb_ssd1306_init_i2c(&i2c_obj);
+	CY_ASSERT(result == CY_RSLT_SUCCESS);
+
+	/* Initialize the U8 Display */
+	u8g2_Setup_ssd1306_i2c_128x64_noname_f(&u8g2, U8G2_R0, u8x8_byte_hw_i2c,
+			u8x8_gpio_and_delay_cb);
+	/* Send init sequence to the display, display is in sleep mode after this */
+	u8g2_InitDisplay(&u8g2);
+	/* Wake up display */
+	u8g2_SetPowerSave(&u8g2, 0);
+
+	/* Prepare display for printing */
+	u8g2_SetFontPosCenter(&u8g2);
+	u8g2_SetFont(&u8g2, u8g2_font_mozart_nbp_tf);
+	u8g2_ClearDisplay(&u8g2);
+	u8g2_ClearBuffer(&u8g2);
+
+	while(1){
+
+		/* Print a message to the display */
+		const char line[] = "Bissmillah";
+		uint8_t width_font = u8g2_GetUTF8Width(&u8g2, line);
+		uint8_t width = u8g2_GetDisplayWidth(&u8g2);
+		uint8_t height = u8g2_GetDisplayHeight(&u8g2);
+		u8g2_DrawFrame(&u8g2, 0, 0, width, height);
+		u8g2_DrawStr(&u8g2, (width - width_font) / 2, height / 2, line);
+		u8g2_SendBuffer(&u8g2);
+		u8g2_ClearBuffer(&u8g2);
+
+		vTaskDelay(5);
+	}
+}
+
+int main(void)
+{
+	cy_rslt_t result;
+
+	/* Initialize the device and board peripherals */
+	result = cybsp_init();
+
+	CY_ASSERT(result == CY_RSLT_SUCCESS);
+
+	__enable_irq();
+
+	xTaskCreate(test, "Test", 1024*2, NULL, (taskPriority-1), &testH);
+
+	vTaskStartScheduler();
+
+	CY_ASSERT(0);
+}
+
+/*
+ * font Keren
+ *
+ * u8g2_font_8x13B_tf
+ * u8g2_font_6x13_tf
+ * u8g2_font_6x12_tf
+ * u8g2_font_t0_11_tf
+ *
+ * */
